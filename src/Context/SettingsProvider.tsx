@@ -1,10 +1,19 @@
 import React, {useContext, useState} from "react";
-import {darkTheme} from "../Themes";
+import {darkTheme, Theme} from "../Themes";
 import english from "../Language/English";
+import { TypeOfExpression } from "typescript";
 
-const SettingsContext = React.createContext({});
+interface Settings {
+  theme: Theme;
+  setTheme: () => void;
+  lang: typeof english;
+  setLang: (lang: string) => void;
+}
+
+const SettingsContext = React.createContext<Settings>({} as Settings);
 
 export const useSettings = () => useContext(SettingsContext);
+
 
 export const SettingsProvider = ({ children }) => {
   const [theme, setTheme] = useState(darkTheme);
